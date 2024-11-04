@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        // Initialize views
+
         dice1TextView = findViewById(R.id.dice1TextView);
         dice2TextView = findViewById(R.id.dice2TextView);
         dice3TextView = findViewById(R.id.dice3TextView);
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void rollDice() {
-        // Generate 5 random numbers
+        //generuj liczby
         int[] diceValues = new int[5];
         Random random = new Random();
         
@@ -50,19 +49,19 @@ public class MainActivity extends AppCompatActivity {
             diceValues[i] = random.nextInt(6) + 1;
         }
 
-        // Display dice values
+        // wyświetl liczby
         dice1TextView.setText(String.valueOf(diceValues[0]));
         dice2TextView.setText(String.valueOf(diceValues[1]));
         dice3TextView.setText(String.valueOf(diceValues[2]));
         dice4TextView.setText(String.valueOf(diceValues[3]));
         dice5TextView.setText(String.valueOf(diceValues[4]));
 
-        // Calculate roll score
+        // liczenie wyniku
         int rollScore = calculateScore(diceValues);
         totalScore += rollScore;
         rollCount++;
 
-        // Update UI
+        // wyświetlanie po losowaniu
         currentRollLabel.setText("Wynik tego losowania: " + rollScore);
         gameResultLabel.setText("Wynik gry: " + totalScore);
         rollCountTextView.setText("Liczba rzutów: " + rollCount);
@@ -70,13 +69,12 @@ public class MainActivity extends AppCompatActivity {
 
     private int calculateScore(int[] diceValues) {
         Map<Integer, Integer> frequency = new HashMap<>();
-        
-        // Count frequency of each number
+
         for (int value : diceValues) {
             frequency.put(value, frequency.getOrDefault(value, 0) + 1);
         }
 
-        // Calculate score based on numbers that appear more than once
+        // liczenie wyniku
         int score = 0;
         for (Map.Entry<Integer, Integer> entry : frequency.entrySet()) {
             if (entry.getValue() >= 2) {
@@ -87,18 +85,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetGame() {
-        // Reset dice displays
+        // reset pola
         dice1TextView.setText("0");
         dice2TextView.setText("0");
         dice3TextView.setText("0");
         dice4TextView.setText("0");
         dice5TextView.setText("0");
 
-        // Reset scores and count
+        // reset wyniki
         totalScore = 0;
         rollCount = 0;
 
-        // Update UI
+        // wyświetlanie
         currentRollLabel.setText("Wynik tego losowania: 0");
         gameResultLabel.setText("Wynik gry: 0");
         rollCountTextView.setText("Liczba rzutów: 0");
